@@ -131,10 +131,20 @@ fn test_unit_type() {
 // region expression
 fn test_expression() {
     // let一定是语句（至少目前的rust版本是这样）
-    // 表达式可以作为右值
+    // let b = (let a = 1); // 这句是错误的
 
+    // 表达式可以作为右值
     // 语句块也可以是表达式
+    let y = {
+        let x = 3;
+        x + 1
+    };
+    println!("y: {}", y);
 }
+// endregion
+
+// region function
+
 // endregion
 
 #[cfg(test)]
@@ -156,5 +166,10 @@ mod tests {
         test_char();
         test_bool();
         test_unit_type();
+    }
+
+    #[test]
+    fn expression() {
+        test_expression();
     }
 }
