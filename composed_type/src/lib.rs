@@ -170,6 +170,105 @@ fn test_tuple_struct() {
 
 // endregion
 
+// region 枚举
+
+#[derive(Debug)]
+enum PokerSuit {
+    Clubs,
+    Spades,
+    Diamonds,
+    Hearts,
+}
+
+#[derive(Debug)]
+enum PokerVal {
+    Num(u8),
+    Other(char),
+}
+
+#[derive(Debug)]
+enum PokerSuitWithVal {
+    Clubs(PokerVal),
+    Spades(PokerVal),
+    Diamonds(PokerVal),
+    Hearts(PokerVal),
+}
+
+fn test_enum() {
+    let heart = PokerSuit::Hearts;
+    let diamond = PokerSuit::Diamonds;
+    fn print_enum(card: PokerSuit) {
+        println!("{:?}", card);
+    }
+
+    print_enum(heart);
+    print_enum(diamond);
+
+    let heart3 = PokerSuitWithVal::Hearts(PokerVal::Num(3));
+    let clubsA = PokerSuitWithVal::Clubs(PokerVal::Other('A'));
+    println!("{:?}", (heart3, clubsA));
+
+    // rust 没有多态的特性， 在一定程度上可以使用 Enum 来承担多态的责任
+}
+
+fn test_option_enum() {
+    let x = Some(5);
+    let y = Some(8);
+    // let sum = x + y; // Option不能直接参与运算， 需要unwrap
+
+    // Option提供了很多 unwrap 的方法，这里使用了相对简单的 unwrap_or_default
+    let sum = x.unwrap_or_default() + y.unwrap_or_default();
+    println!("{}", sum);
+
+    // Option::None 需要指明类型
+    let t: Option<i32> = None;
+
+    // 另一种常见的方法是使用match
+    let unwrapped_val = match t {
+        None => 0,
+        Some(i) => i,
+    };
+    println!("{}", unwrapped_val);
+}
+
+// endregion
+
+// region 数组
+
+fn test_array() {
+    // rust 的数组是基本类型，长度不可变，存储在栈上
+    // rust 的Vector数组是动态数组，长度可以变化，存储在堆上
+    let months = [
+        "January", "February", "March", "April", "May", "June", "July", "October", "November",
+        "December",
+    ];
+    // 数组的类型为 [type; capacity]
+    let a: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("{:?}", (a, months));
+    // 数组初始化
+    let a = [3; 10];
+    println!("{:?}", a);
+
+    // python会做数组越界检查（运行时）
+    // a[10] error
+
+    // 数组也有切片
+    let slice = &a[1..3];
+    // 切片类型为 &[type]
+    println!("{:?}", slice);
+
+    // 数组可以用迭代器遍历
+    let a: [i32; 5] = [1, 2, 3, 4, 5];
+    for n in a.iter() {
+        print!("\t{} + 10 = {}\n", n, n + 10);
+    }
+
+    // 二维数组
+    let arrays = [[0; 10]; 10];
+    println!("{:?}", arrays);
+}
+
+// endregion
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -190,5 +289,16 @@ mod tests {
     fn struct_test() {
         test_struct();
         test_tuple_struct();
+    }
+
+    #[test]
+    fn enum_test() {
+        test_enum();
+        test_option_enum();
+    }
+
+    #[test]
+    fn array() {
+        test_array();
     }
 }

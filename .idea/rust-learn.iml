@@ -8,11 +8,13 @@
       <sourceFolder url="file://$MODULE_DIR$/basic_variable/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ownership/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/composed_type/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/process_controll/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/ch2/target" />
       <excludeFolder url="file://$MODULE_DIR$/basic_variable/target" />
       <excludeFolder url="file://$MODULE_DIR$/ownership/target" />
       <excludeFolder url="file://$MODULE_DIR$/composed_type/target" />
+      <excludeFolder url="file://$MODULE_DIR$/process_controll/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
